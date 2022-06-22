@@ -5,7 +5,7 @@ using UnityEngine;
 public class PaddleController : MonoBehaviour
 {
     public KeyCode KeyUp, KeyDown, KeyLeft, KeyRight;
-    private Rigidbody rig;
+    public Rigidbody rig;
     public float speed = 7;
     void Start()
     {
@@ -51,5 +51,10 @@ public class PaddleController : MonoBehaviour
     private void AttachMovement(Vector3 movement)
     {
         rig.velocity = movement;
+    }
+
+    public void PaddleDestroy()
+    {
+        Destroy(gameObject);
     }
 }

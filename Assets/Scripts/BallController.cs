@@ -23,7 +23,7 @@ public class BallController : MonoBehaviour
     {
         float x = 0; 
         float z = 0;
-        float minRange = 0.6f; //Agar bola tidak diam atau terlalu lambat
+        float minRange = 0.3f; //Agar bola tidak diam atau terlalu lambat
 
         //Cek posisi spawn bola dan menentukan arah geraknya
         if (gameObject.transform.position.z > 0 && gameObject.transform.position.x < 0)
@@ -49,5 +49,36 @@ public class BallController : MonoBehaviour
         }
 
         rig.velocity = new Vector3(speed * x, 0, speed * z);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Paddle")
+        {
+            PaddleController pControl = collision.gameObject.GetComponent<PaddleController>();
+            Vector3 currentSpd = rig.velocity.normalized;
+            if (pControl.rig.velocity.x > 0)
+            {
+                currentSpd.x -= 0.5f;
+            }
+            if (pControl.rig.velocity.x < 0)
+            {
+                currentSpd.x -= 1.5f;
+            }
+            if (pControl.rig.velocity.z > 0)
+            {
+                currentSpd.z -= 0.5f;
+            }
+            if (pControl.rig.velocity.z < 0)
+            {
+                currentSpd.z -= 1.5f;
+            }
+            Vector3 normal = collision.GetContact(0).normal;
+            rig.velocity =  Vector3.Reflect(currentSpd, normal) * speed * 1.3f;
+        }
+        if (collision.gameObject.tag == "BallEnter")
+        {
+            rig.velocity *= 1.2f;
+        }
     }
 }
