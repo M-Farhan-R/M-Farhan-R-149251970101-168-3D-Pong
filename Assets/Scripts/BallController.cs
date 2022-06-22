@@ -6,6 +6,7 @@ public class BallController : MonoBehaviour
 {
     public float speed;
     private Rigidbody rig;
+    private Vector3 lastVelocity;
 
     void Start()
     {
@@ -13,17 +14,11 @@ public class BallController : MonoBehaviour
         RandomMoveDirection();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void RandomMoveDirection()
     {
         float x = 0; 
         float z = 0;
-        float minRange = 0.3f; //Agar bola tidak diam atau terlalu lambat
+        float minRange = 0.7f; //Agar bola tidak diam atau terlalu lambat
 
         //Cek posisi spawn bola dan menentukan arah geraknya
         if (gameObject.transform.position.z > 0 && gameObject.transform.position.x < 0)
@@ -56,29 +51,56 @@ public class BallController : MonoBehaviour
         if (collision.gameObject.tag == "Paddle")
         {
             PaddleController pControl = collision.gameObject.GetComponent<PaddleController>();
-            Vector3 currentSpd = rig.velocity.normalized;
+            Vector3 currentSpd = rig.velocity;
+            float counterDirection = 0.8f;
+            float sameDirection = 0f;
             if (pControl.rig.velocity.x > 0)
             {
-                currentSpd.x -= 0.5f;
+                if (currentSpd.x > 0)
+                {
+                    currentSpd.x += sameDirection * speed;
+                } else
+                {
+                    currentSpd.x += counterDirection * speed;
+                }
             }
             if (pControl.rig.velocity.x < 0)
             {
-                currentSpd.x -= 1.5f;
+                if (currentSpd.x < 0)
+                {
+                    currentSpd.x -= sameDirection * speed;
+                } else
+                {
+                    currentSpd.x -= counterDirection * speed;
+                }
             }
             if (pControl.rig.velocity.z > 0)
             {
-                currentSpd.z -= 0.5f;
+                if (currentSpd.z < 0)
+                {
+                    currentSpd.z -= sameDirection * speed;
+                } else
+                {
+                    currentSpd.z -= counterDirection * speed;
+                }
             }
             if (pControl.rig.velocity.z < 0)
             {
-                currentSpd.z -= 1.5f;
+                if (currentSpd.z < 0)
+                {
+                    currentSpd.z -= sameDirection * speed;
+                } else
+                {
+                    currentSpd.z -= counterDirection * speed;
+                }
             }
             Vector3 normal = collision.GetContact(0).normal;
-            rig.velocity =  Vector3.Reflect(currentSpd, normal) * speed * 1.3f;
+            rig.velocity =  Vector3.Reflect(currentSpd, normal).normalized * speed * 1.4f;
         }
         if (collision.gameObject.tag == "BallEnter")
         {
-            rig.velocity *= 1.2f;
+            Vector3 normal = collision.GetContact(0).normal;
+            rig.velocity =  Vector3.Reflect(rig.velocity, normal).normalized * speed * 1.2f;
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public BallManager ballManager;
+    public GameObject gameOverPanel;
     public List<GameObject> walls, paddles;
     public int scoreP1, scoreP2, scoreP3, scoreP4, playerCount; 
     public int maxScore;
@@ -42,13 +44,31 @@ public class GameManager : MonoBehaviour
         if (score >= maxScore)
         {
             wall.GetComponent<WallTrigger>().TriggerOff();
-            paddle.GetComponent<PaddleController>().PaddleDestroy();
+            paddle.GetComponent<PaddleController>().PaddleDeactive();
             playerCount -= 1;
 
             if (playerCount == 1)
             {
-                //Game Over
+                Time.timeScale = 0;
+                gameOverPanel.SetActive(true);
             }
         }
+    }
+
+    public void ResetGame()
+    {
+        for (int i = 0; i < paddles.Count; i++)
+        {
+            walls[i].GetComponent<WallTrigger>().TriggerOn();
+            paddles[i].GetComponent<PaddleController>().PaddleActive();
+            paddles[i].GetComponent<PaddleController>().ResetPosition();
+        }
+        ballManager.RemoveAllBall();
+        ballManager.timer = 0;
+        scoreP1 = 0;
+        scoreP2 = 0;
+        scoreP3 = 0;
+        scoreP4 = 0;
+        playerCount = 4;
     }
 }

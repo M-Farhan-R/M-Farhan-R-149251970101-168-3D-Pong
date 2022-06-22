@@ -10,7 +10,7 @@ public class BallManager : MonoBehaviour
     private List<GameObject> ballList;
     public int maxBall;
     public int spawnInterval;
-    private float timer;
+    public float timer;
 
     void Start()
     {
@@ -42,23 +42,24 @@ public class BallManager : MonoBehaviour
 
         //Agar tidak tabrakan dengan objek yang ada di tiap sudut
         int offset = 2;
+        float y = result.position.y + 0.5f;
         Vector3 spawnOffset = Vector3.zero;
 
         if (result == spawnPosition[0])
         {
-            spawnOffset = new Vector3(result.position.x + offset, result.position.y, result.position.z - offset);
+            spawnOffset = new Vector3(result.position.x + offset, y, result.position.z - offset);
         } 
         if (result == spawnPosition[1])
         {
-            spawnOffset = new Vector3(result.position.x - offset, result.position.y, result.position.z - offset);
+            spawnOffset = new Vector3(result.position.x - offset, y, result.position.z - offset);
         } 
         if (result == spawnPosition[2])
         {
-            spawnOffset = new Vector3(result.position.x + offset, result.position.y, result.position.z + offset);
+            spawnOffset = new Vector3(result.position.x + offset, y, result.position.z + offset);
         } 
         if (result == spawnPosition[3])
         {
-            spawnOffset = new Vector3(result.position.x - offset, result.position.y, result.position.z + offset);
+            spawnOffset = new Vector3(result.position.x - offset, y, result.position.z + offset);
         }
 
         GameObject ball = Instantiate(template[0], spawnOffset, Quaternion.identity, spawnGroup);
@@ -70,5 +71,13 @@ public class BallManager : MonoBehaviour
     {
         ballList.Remove(ball);
         Destroy(ball);
+    }
+
+    public void RemoveAllBall()
+    {
+        while (ballList.Count > 0)
+        {
+            RemoveBall(ballList[0]);
+        }
     }
 }

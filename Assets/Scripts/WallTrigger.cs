@@ -8,6 +8,12 @@ public class WallTrigger : MonoBehaviour
     public GameManager gameManager;
     public BallManager ballManager;
     public bool goalP1, goalP2, goalP3, goalP4;
+    private Vector3 startPosition;
+
+    void Start()
+    {
+        startPosition = transform.position;
+    }
 
     public void OnTriggerEnter(Collider collision)
     {
@@ -56,5 +62,11 @@ public class WallTrigger : MonoBehaviour
         {
             transform.position = new Vector3(wallPosition.x - close, wallPosition.y, wallPosition.z);
         }
+    }
+
+    public void TriggerOn()
+    {
+        transform.position = startPosition;
+        GetComponent<Collider>().isTrigger = true;
     }
 }

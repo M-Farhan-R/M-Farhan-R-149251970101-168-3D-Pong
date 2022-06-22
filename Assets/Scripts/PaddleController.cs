@@ -7,9 +7,12 @@ public class PaddleController : MonoBehaviour
     public KeyCode KeyUp, KeyDown, KeyLeft, KeyRight;
     public Rigidbody rig;
     public float speed = 7;
+    private Vector3 startPosition;
+
     void Start()
     {
         rig = GetComponent<Rigidbody>();
+        startPosition = rig.transform.position;
     }
 
     
@@ -53,8 +56,18 @@ public class PaddleController : MonoBehaviour
         rig.velocity = movement;
     }
 
-    public void PaddleDestroy()
+    public void PaddleDeactive()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    public void PaddleActive()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = startPosition;
     }
 }
