@@ -210,10 +210,11 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 0.7
   m_Text: 'On the top of screen in game, player can see how many times the ball enter
-    their wall.
+    their own wall.
 
 
-    When the ball enter their wall 15 times, the player will lose.'
+    When the ball entering player''s wall 15 times, the player
+    lose.'
 --- !u!222 &3006867
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -533,7 +534,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Player1 : Up, Down'
+  m_Text: 'Player2 : Up, Down'
 --- !u!222 &230547841
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -741,7 +742,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Player1 : Up, Down'
+  m_Text: 'Player4 : Up, Down'
 --- !u!222 &305186218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -936,7 +937,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Player1 : Left, Right'
+  m_Text: 'Player3 : Left, Right'
 --- !u!222 &350371664
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1399,7 +1400,7 @@ MonoBehaviour:
 
 
     Each
-    player have to prevent the balls from entering their goal (wall)'
+    player have to prevent the balls from entering their own goal (wall)'
 --- !u!222 &864855261
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3230,7 +3231,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 0.7
-  m_Text: The last player stands is the winner
+  m_Text: The last player stands will be the winner
 --- !u!222 &1589333467
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4133,6 +4134,7 @@ MonoBehaviour:
   - {fileID: 1824156197}
   - {fileID: 576745536}
   - {fileID: 272424345}
+  - {fileID: 1053925685}
 --- !u!1 &1819978105
 GameObject:
   m_ObjectHideFlags: 0
