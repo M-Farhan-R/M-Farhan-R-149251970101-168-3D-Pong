@@ -51,6 +51,13 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 0;
                 gameOverPanel.SetActive(true);
+                for (int i = 0; i < paddles.Count; i++)
+                {
+                    if (paddles[i].activeInHierarchy)
+                    {
+                        gameOverPanel.GetComponent<GameOverControl>().SetPlayerWinText("Player ", i + 1);
+                    }
+                }
             }
         }
     }

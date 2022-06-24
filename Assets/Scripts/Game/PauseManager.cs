@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -41,7 +42,8 @@ public class PauseManager : MonoBehaviour
 
     public void HomeButton()
     {
-
+        SceneManager.LoadScene("MainMenuScene");
+        Time.timeScale = 1;
     }
 
     public void RestartButton()
